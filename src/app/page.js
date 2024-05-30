@@ -24,6 +24,21 @@ import Tooltip from '@mui/material/Tooltip';
 
 
 export default function Home() {
+  function Submit(e){
+    const formEle=document.querySelector(".My-Form")
+    e.preventDefault()
+    console.log("Submitted")
+    const formDatab = new FormData(formEle)
+    fetch("https://script.google.com/macros/s/AKfycbywETVl6nfVENm82tKF3L9lv7u5SkeYXbWdjDG7iuKJYhjE6M2td6rT3XqPcWR4Tooxtg/exec",{  method:"POST",
+    body:formDatab})
+    .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   
   const[darkMode, setDarkMode]=useState(false);  
   return (
@@ -92,24 +107,24 @@ export default function Home() {
           
         </section>
 
-        <section className="flex flex-col justify-center items-center min-h-screen">
+        <section className=" flex flex-col justify-center items-center min-h-screen">
           <h2 className="text-3xl mt-10 py-1 font-orbitron text-center pt-5 dark:text-white animate-fadeInBottom">Contact me</h2>
           <div className="mt-15 w-96 h-96 flex justify-center pb-10 text-center shadow-lg p-10 rounded-xl my-10 animate-fadeInBottom hover:bg-gray-400 transition duration-200">
-              <form className="max-w-sm mx-auto">
+              <form className="max-w-sm mx-auto My-Form" onSubmit={(e)=>Submit(e)}>
                 <div>
                   <label htmlFor="name-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                  <input type="text" id="name-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                  <input type="text" id="name-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Name" name="Name"/>
                 </div>
                 <div>
                   <label htmlFor="email-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                  <input type="text" id="email-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                  <input type="text" id="email-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Email" name="Email"/>
                 </div>
                 <div className="mb-5">
                   <label htmlFor="message-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Message</label>
-                  <input type="text" id="message-input" className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                  <input type="text" id="message-input" className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Message" name="Message"/>
                 </div>
                 <div>
-                  <button className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-4 py-2 rounded-md ml-8 items-center text-center">Submit</button>
+                  <button className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-4 py-2 rounded-md ml-8 items-center text-center"type="submit">Submit</button>
                 </div>
               </form>
           </div>
