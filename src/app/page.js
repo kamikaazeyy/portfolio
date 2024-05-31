@@ -42,48 +42,36 @@ export default function Home() {
   
   const[darkMode, setDarkMode]=useState(false);  
   return (
-    <div className={darkMode? "dark": ""}>
+    <div className={`transition-colors duration-500 ${darkMode? "dark" : ""}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet"/>
         <title>Pranav Mehrotra</title>
       </head>
-      <main className="bg-slate-200 px-10 md:px-20 lg:px-40 dark:bg-gray-900">
-        <section className= "min-h-screen  ">
-          <nav className="py-10 mb-12 flex justify-between dark:text-white animate-fadeInTop">
-            <h1 className="text-4xl font-orbitron text-red-800 dark:text-red-400 ">Kamikaazeyy</h1>
-            <ul className="flex items-center">
-              <Tooltip title="It Gets Better in the Dark">
+      <main className="bg-slate-200 px-4 sm:px-10 md:px-20 lg:px-40 xl:px-40 dark:bg-gray-900">
+        <section className="min-h-screen">
+          <nav className="py-4 sm:py-10 mb-12 flex flex-col sm:flex-row justify-between dark:text-white animate-fadeInTop">
+            <h1 className="text-4xl font-orbitron text-red-800 dark:text-red-400 sm:text-3xl">Kamikaazeyy</h1>
+            <ul className="flex items-center space-x-4 sm:space-x-8">
+              <Tooltip title="Toggle Dark Mode">
                 <li><BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl"/></li>
-                </Tooltip>
-              <li><a className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-4 py-2 rounded-md ml-8" href={web_dev_resume} target="_blank" rel="noopener noreferrer">Resume</a></li>
+              </Tooltip>
+              <li><a className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-4 py-2 rounded-md" href={web_dev_resume} target="_blank" rel="noopener noreferrer">Resume</a></li>
             </ul>
           </nav>
-          <div className=" animate-fadeInBottom text-center p-10 justify-center items-center ">
-  
-            <h2 class="  text-red-800 dark:text-red-400 text-6xl font-bold font-orbitron mb-5">Pranav Mehrotra</h2>
-            
-            <h3 className=" text-2xl py-2 dark:text-white md:text-3xl font-orbitron mb-5">Web Developer/Data Analyst</h3>
+          <div className="animate-fadeInBottom text-center p-4 sm:p-10 justify-center items-center">
+            <h2 className="text-red-800 dark:text-red-400 text-6xl font-bold font-orbitron mb-5">Pranav Mehrotra</h2>
+            <h3 className="text-2xl py-2 dark:text-white md:text-3xl font-orbitron mb-5">Web Developer/Data Analyst</h3>
             <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 md:text-xl max-w-xl mx-auto">Tech Enthusiast who like to try and play around with various technologies</p>
           </div>
-          <div className="text-5xl flex justify-center gap-16 py-3 text-gray-600 dark:text-gray-400 ">
-          <a href="https://twitter.com/mehrotrapranav1" target="_blank" className="hover:text-gray-400 transition duration-200 animate-fadeInLeft">
-              <BsTwitterX />
-          </a>
-          <a href="https://www.linkedin.com/in/pranav-mehrotra-879025194/" target="_blank" className="hover:text-gray-400 transition duration-200 animate-fadeInForward">
-            <BsLinkedin />
-          </a>
-          <a href="https://github.com/kamikaazeyy?tab=overview&from=2024-03-01&to=2024-03-26" target="_blank" className="hover:text-gray-400 transition duration-200 animate-fadeInRight">
-            <BsGithub />
-          </a>
-          <a href="mailto:mehrotrapranav240@gmail.com" target="_blank" className="hover:text-gray-400 transition duration-200 animate-fadeInRight">
-            <SiGmail/>
-          </a>
-        
-            
+          <div className="text-5xl flex justify-center gap-16 py-3 text-gray-600 dark:text-gray-400">
+            <a href="https://twitter.com/mehrotrapranav1" target="_blank" className="hover:text-gray-400 transition duration-200"><BsTwitterX /></a>
+            <a href="https://www.linkedin.com/in/pranav-mehrotra-879025194/" target="_blank" className="hover:text-gray-400 transition duration-200"><BsLinkedin /></a>
+            <a href="https://github.com/kamikaazeyy?tab=overview&from=2024-03-01&to=2024-03-26" target="_blank" className="hover:text-gray-400 transition duration-200"><BsGithub /></a>
+            <a href="mailto:mehrotrapranav240@gmail.com" target="_blank" className="hover:text-gray-400 transition-duration-200"><SiGmail/></a>
           </div>
-          <div className=" relative mx-auto bg-gradient-to-b from-red-500 rounded-full w-120 h-120 mt-20  overflow-hidden md:h-96 md:w-96 pb-10 animate-fadeInForward">
+          <div className="relative mx-auto bg-gradient-to-b from-red-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:w-96 md:h-96 pb-10 animate-fadeInForward">
             <Image src={Kamikaazeyy} layout="fill" objectFit="cover"/>
           </div>
         </section>
