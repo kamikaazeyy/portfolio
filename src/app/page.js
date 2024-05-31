@@ -24,19 +24,28 @@ import Tooltip from '@mui/material/Tooltip';
 
 
 export default function Home() {
-  function Submit(e){
-    const formEle=document.querySelector(".My-Form")
-    e.preventDefault()
-    console.log("Submitted")
-    const formDatab = new FormData(formEle)
-    fetch("https://script.google.com/macros/s/AKfycbywETVl6nfVENm82tKF3L9lv7u5SkeYXbWdjDG7iuKJYhjE6M2td6rT3XqPcWR4Tooxtg/exec",{  method:"POST",
-    body:formDatab})
-    .then((res) => res.json())
-      .then((data) => {
+  function Submit(e) {
+    const formEle = document.querySelector(".My-Form");
+    e.preventDefault();
+    console.log("Submitted");
+    const formDatab = new FormData(formEle);
+    fetch("https://script.google.com/macros/s/AKfycbywETVl6nfVENm82tKF3L9lv7u5SkeYXbWdjDG7iuKJYhjE6M2td6rT3XqPcWR4Tooxtg/exec", { method: "POST", body: formDatab })
+     .then((res) => res.json())
+     .then((data) => {
         console.log(data);
-      })
-      .catch((error) => {
+        Array.from(formEle.elements).forEach(inputElement => {
+          if (inputElement.type === 'text' || inputElement.type === 'password' || inputElement.type === 'email') {
+            inputElement.value = '';
+          }
+        });
+     })
+    .catch((error) => {
         console.log(error);
+        Array.from(formEle.elements).forEach(inputElement => {
+          if (inputElement.type === 'text' || inputElement.type === 'password' || inputElement.type === 'email') {
+            inputElement.value = '';
+          }
+        });
       });
   }
   
