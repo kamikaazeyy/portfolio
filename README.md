@@ -29,9 +29,9 @@
 
 <a href="https://www.w3.org/html/" target="_blank"> <img src="https://img.icons8.com/color/48/000000/html-5.png"/> </a> 
 
-<a href="https://tailwindcss.com/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=x7XMNGh2vdqA&format=png&color=000000"/> </a>
-<a href="https://nextjs.org/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=yUdJlcKanVbh&format=png&color=000000" width="32" height="32"/> </a>
-<a href="https://mui.com/material-ui/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=gFw7X5Tbl3ss&format=png&color=000000"/> </a>
+<a href="https://tailwindcss.com/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=x7XMNGh2vdqA&format=png&color=000000" width="40" height="40"/> </a>
+<a href="https://nextjs.org/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=yUdJlcKanVbh&format=png&color=000000" width="40" height="40"/> </a>
+<a href="https://mui.com/material-ui/" target="_blank"> <img src="https://img.icons8.com/?size=100&id=gFw7X5Tbl3ss&format=png&color=000000" width="40" height="40"/> </a>
 
 ## Preview:
 
