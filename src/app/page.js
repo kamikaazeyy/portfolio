@@ -1,4 +1,5 @@
-'use client'
+//'use client'
+/*
 import { BsFillMoonStarsFill, BsLinkedin, BsTwitterX, BsGithub } from 'react-icons/bs';
 import { SiGmail } from "react-icons/si";
 import Image from 'next/image';
@@ -164,5 +165,36 @@ export default function Home() {
 
     </div>
 
+  );
+}
+*/
+'use client'
+import { useState } from 'react';
+import Head from 'next/head';
+import Navbar from './Components/Navbar';
+import Hero from './Components/Hero';
+import Skills from './Components/Skills';
+import ContactForm from './Components/ContactForm';
+import Projects from './Components/Projects';
+
+export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <div className={`transition-colors duration-500 ${darkMode ? "dark" : ""}`}>
+      <Head>
+        <title>Pranav Mehrotra</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet" />
+      </Head>
+      <main className="bg-slate-200 px-4 sm:px-10 md:px-20 lg:px-40 dark:bg-gray-900">
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Hero />
+        <Skills />
+        <ContactForm />
+        <Projects />
+      </main>
+    </div>
   );
 }
