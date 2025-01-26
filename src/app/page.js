@@ -176,6 +176,7 @@ import Hero from './Components/Hero';
 import Skills from './Components/Skills';
 import ContactForm from './Components/ContactForm';
 import Projects from './Components/Projects';
+import Timeline from './Components/TimeLineComponent'
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -191,7 +192,9 @@ export default function Home() {
       <main className="bg-slate-200 px-4 sm:px-10 md:px-20 lg:px-40 dark:bg-gray-900">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Hero />
-        <Skills />
+        <Skills />   
+        <Timeline />
+
         <ContactForm />
         <Projects />
       </main>
