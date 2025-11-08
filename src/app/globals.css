@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Orbitron:wght@400..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Orbitron:wght@400..900&display=swap')
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -17,11 +17,9 @@
 }
 
 @font-face {
-  font-family: "tilt";
+  font-family: 'tilt';
   src: url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 }
-
-
 
 @layer base {
   :root {
@@ -51,6 +49,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+  
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
@@ -79,13 +78,81 @@
   }
 }
 
-
-
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
+}
+
+.hover-glitch-text {
+  position: relative;
+  color: white; 
+}
+
+.hover-glitch-text:hover:before,
+.hover-glitch-text:hover:after {
+  position: absolute;
+  content: attr(data-text); 
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.hover-glitch-text:hover:before {
+  top: 49.5%;
+  left: 49.5%;
+  color: rgba(239, 68, 68, 0.8);
+  animation: distort1 300ms linear infinite;
+}
+
+.hover-glitch-text:hover:after {
+  top: 50.5%;
+  left: 50.5%;
+  color: rgba(59, 130, 246, 0.8);
+  animation: distort2 300ms linear infinite;
+}
+
+@keyframes distort1 {
+  0% { top: 49.5%; left: 49.5%; }
+  12.5% { top: 49.5%; left: 50%; }
+  25% { top: 49.5%; left: 50.5%; }
+  37.5% { top: 50%; left: 50.5%; }
+  50% { top: 50.5%; left: 50.5%; }
+  62.5% { top: 50.5%; left: 50%; }
+  75% { top: 50.5%; left: 49.5%; }
+  87.5% { top: 50%; left: 49.5%; }
+  100% { top: 49.5%; left: 49.5%; }
+}
+
+@keyframes distort2 {
+  0% { top: 50.5%; left: 50.5%; }
+  12.5% { top: 50%; left: 50.5%; }
+  25% { top: 49.5%; left: 50.5%; }
+  37.5% { top: 49.5%; left: 50%; }
+  50% { top: 49.5%; left: 49.5%; }
+  62.5% { top: 50%; left: 49.5%; }
+  75% { top: 50.5%; left: 49.5%; }
+  87.5% { top: 50.5%; left: 50%; }
+  100% { top: 50.5%; left: 50.5%; }
+}
+
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid white;
+  animation: typing 3.5s steps(23, end) infinite alternate, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 22ch; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
 }

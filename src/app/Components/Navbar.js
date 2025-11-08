@@ -1,6 +1,7 @@
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 import Tooltip from '@mui/material/Tooltip';
-import web_dev_resume from '../../../public/Pranav Mehrotra.pdf';
+// Use direct public path reference instead of import
+const web_dev_resume = '/web-dev-Resume-Final.pdf';
 
 export default function Navbar({ darkMode, setDarkMode }) {
   return (
@@ -17,7 +18,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
         <li>
           <a
             className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded-md"
-            href="https://drive.google.com/file/d/1U12tWVHHvG3mK1RJS954a1aD0uRzQyM6/view?usp=sharing"
+            href="https://drive.google.com/file/d/1b-vtf1Ayiibdu9i6KoWtBUcwiRb8qmL9/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
           >
