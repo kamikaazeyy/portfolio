@@ -9,10 +9,10 @@ export default function Hero() {
         <h2 className="text-red-800 dark:text-red-400 text-4xl sm:text-6xl font-bold font-orbitron mb-5">
           Pranav Mehrotra
         </h2>
-        <h3 className="text-xl sm:text-2xl py-2 dark:text-white md:text-3xl font-orbitron mb-5">
+        <h3 className="text-xl sm:text-2xl py-2 text-white md:text-3xl font-orbitron mb-5">
           Web Developer
         </h3>
-        <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 md:text-xl max-w-xl mx-auto">
+        <p className="text-md py-5 leading-8 text-gray-200 md:text-xl max-w-xl mx-auto">
           Tech Enthusiast who likes to try and play around with various
           technologies
         </p>

@@ -12,20 +12,19 @@ const techStack = [
   { src: "/sql.png", alt: "SQL" }, // <-- Added comma
   { src: "/docker.png", alt: "Docker" }, // <-- Added comma, corrected alt text
   { src: "/mongodb.png", alt: "MongoDB" }, // <-- Added comma, corrected alt text & "monogodb" typo
-  { src: "/git.png", alt: "Git" } // <-- Corrected alt text & added leading "/" to path
+  { src: "/git.png", alt: "Git" } ,// <-- Corrected alt text & added leading "/" to path
 ];
 
 const Tape = () => {
-  // ... (The rest of your component stays the same)
   return (
-    <div className="overflow-x-clip pb-32 pt-16 lg:py-24">
-      <div className="-mx-1 bg-gradient-to-r from-orange-300 to-sky-400">
+    <div className="w-full overflow-x-clip py-16 lg:py-24">
+      <div className="w-full bg-transparent">
         <div className="flex [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex flex-none animate-move-left gap-4 py-3 pr-4 [animation-duration:30s]">
+          <div className="flex flex-none animate-move-left gap-8 py-3 [animation-duration:30s]">
             {[...new Array(2)].fill(0).map((_, index) => (
               <React.Fragment key={index}>
                 {techStack.map((tech, techIndex) => (
-                  <div key={`${index}-${techIndex}`} className="inline-flex items-center gap-4">
+                  <div key={`${index}-${techIndex}`} className="inline-flex items-center">
                     <img 
                       src={tech.src} 
                       alt={tech.alt}
@@ -33,14 +32,6 @@ const Tape = () => {
                       height={48}
                       className="object-contain"
                     />
-                    <svg
-                      className="size-6"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle cx="7.5" cy="7.5" r="4.5" fill="currentColor" className="text-gray-900" />
-                    </svg>
                   </div>
                 ))}
               </React.Fragment>

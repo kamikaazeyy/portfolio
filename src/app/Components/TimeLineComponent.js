@@ -22,7 +22,7 @@ export default function timelinecomponents() {
           align="right"
           variant="body2"
           color="text.secondary"
-          className=" text-black dark:text-white"
+          className=" text-white"
         >
          Jan 2025 - Present 
         </TimelineOppositeContent>
@@ -34,10 +34,10 @@ export default function timelinecomponents() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
-          <Typography variant="h6" component="span" className=" text-black dark:text-white">
+          <Typography variant="h6" component="span" className=" text-white">
             Data Resolve Technologies
           </Typography>
-          <Typography className=" text-black dark:text-white">Cybersecurity Consultant</Typography>
+          <Typography className=" text-white">Cybersecurity Consultant</Typography>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
@@ -45,7 +45,7 @@ export default function timelinecomponents() {
           sx={{ m: 'auto 0' }}
           variant="body2"
           color="text.secondary"
-          className=" text-black dark:text-white"
+          className=" text-white"
         >
           Aug 2023 - Mar 2024
         </TimelineOppositeContent>
@@ -57,10 +57,10 @@ export default function timelinecomponents() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
-          <Typography variant="h6" component="span" className=" text-black dark:text-white">
+          <Typography variant="h6" component="span" className=" text-white">
             Mu Sigma Business Solutions
           </Typography>
-          <Typography className=" text-black dark:text-white">Data Analyst</Typography>
+          <Typography className=" text-white">Data Analyst</Typography>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
@@ -68,7 +68,7 @@ export default function timelinecomponents() {
           sx={{ m: 'auto 0' }}
           variant="body2"
           color="text.secondary"
-          className=" text-black dark:text-white"
+          className="text-white"
         >
           Feb 2023 - April 2023
         </TimelineOppositeContent>
@@ -80,10 +80,10 @@ export default function timelinecomponents() {
           <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '12px', px: 2 }}>
-          <Typography variant="h6" component="span" className=" text-black dark:text-white">
+          <Typography variant="h6" component="span" className=" text-white">
             Webixy Technologies
           </Typography>
-          <Typography className=" text-black dark:text-white">Web Developer Intern</Typography>
+          <Typography className=" text-white">Web Developer Intern</Typography>
         </TimelineContent>
       </TimelineItem>
       

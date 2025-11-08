@@ -7,13 +7,13 @@ export default function Navbar({ darkMode, setDarkMode }) {
     <nav className="py-4 sm:py-10 mb-12 flex flex-wrap justify-between items-center dark:text-white animate-fadeInTop">
       <h1 className="text-xl font-orbitron text-red-800 dark:text-red-400 sm:text-2xl mb-4 sm:mb-0">Kamikaazeyy</h1>
       <ul className="flex items-center space-x-4">
-        <li>
+        {/* <li>
           <Tooltip title="Toggle Dark Mode">
             <button onClick={() => setDarkMode(!darkMode)} aria-label="Toggle dark mode">
               <BsFillMoonStarsFill className="cursor-pointer text-xl" />
             </button>
           </Tooltip>
-        </li>
+        </li> */}
         <li>
           <a
             className="bg-gradient-to-r from-cyan-500 to-red-500 text-white px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded-md"
