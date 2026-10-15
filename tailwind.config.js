@@ -2,7 +2,7 @@
 // tailwind.config.js
 
 module.exports = {
-  darkMode: ["class", "class"],
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +10,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+        colors: {
+          cyber: {
+            bg: '#07080d',
+            surface: '#0d1017',
+            card: '#121622',
+            cardHover: '#181e2e',
+            border: '#1e2436',
+            red: '#ff3355',
+            cyan: '#00e5ff',
+            muted: '#8b949e',
+          }
+        },
         fontFamily: {
           orbitron: ['var(--font-orbitron)', 'sans-serif'],
           dancing: ['var(--font-dancing)', 'cursive'],
