@@ -15,23 +15,29 @@
     "@mui/lab": "^6.0.0-beta.24",
     "@mui/material": "^6.4.1",
     "@radix-ui/react-icons": "^1.3.2",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.545.0",
     "motion": "^12.23.22",
     "next": "^16.0.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19",
+    "react-dom": "^19",
     "react-icons": "^5.0.1",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "three": "^0.170.0",
+    "three-globe": "^2.45.6"
   },
   "devDependencies": {
     "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "typescript": "5.9"
   }
 }

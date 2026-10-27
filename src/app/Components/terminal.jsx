@@ -10,6 +10,8 @@ import React, {
   useState,
 } from "react";
 import { motion, useInView } from "motion/react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Starfield } from "./Starfield";
 import { cn } from "@/lib/utils";
 
 // ============================================================================
@@ -228,30 +230,29 @@ export const Terminal = ({
   const content = (
     <div
       ref={containerRef}
-      className={cn(
-        "z-0 h-full w-full rounded-2xl border border-cyan-500/30 bg-[#080a12]/95 backdrop-blur-xl shadow-[0_0_60px_rgba(0,0,0,0.9)] overflow-hidden",
-        className
-      )}
+      className={cn("hud-chamfer p-px bg-bat-400/30", className)}
     >
-      {/* Unified Cyber Terminal Window Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 bg-[#0c0f1a] px-4 py-2.5">
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-          <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-          <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
+      <div className="hud-chamfer h-full w-full bg-cyber-surface/95 backdrop-blur-xl overflow-hidden">
+        {/* HUD window bar — matches watchtower panel headers */}
+        <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-cyber-card px-4 py-2.5">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="size-2.5 rotate-45 bg-bat-400" />
+            <span className="size-2.5 rotate-45 bg-bat-400/50" />
+            <span className="size-2.5 rotate-45 bg-white/20" />
+          </div>
+          <div className="font-mono text-[10px] sm:text-xs text-bat-400/90 tracking-widest uppercase flex items-center gap-2 min-w-0">
+            <span className="size-2 rounded-full bg-bat-400 animate-pulse shrink-0" />
+            <span className="truncate">{title}</span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            {headerRight}
+          </div>
         </div>
-        <div className="font-mono text-xs text-cyan-400/90 tracking-wide flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>{title}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {headerRight}
-        </div>
-      </div>
 
-      {/* Unified Single Terminal Canvas */}
-      <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm bg-[#070910]/90 text-gray-100">
-        {wrappedChildren}
+        {/* Unified Single Terminal Canvas */}
+        <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm bg-cyber-bg/90 text-gray-100">
+          {wrappedChildren}
+        </div>
       </div>
     </div>
   );
@@ -406,7 +407,6 @@ const PORTFOLIO_DATA = {
       status: "Completed",
       stack: "JavaScript, LocalStorage",
       desc: "Persistent browser task manager with priority categories.",
-      link: "https://github.com/kamikaazeyy",
     },
     {
       name: "Guess Number Game",
@@ -450,6 +450,19 @@ const QUICK_COMMANDS = [
   "/resume",
   "/clear",
 ];
+
+// slow orbital drift for the backdrop starfield
+function StarfieldDrift() {
+  const ref = useRef(null);
+  useFrame((_, dt) => {
+    if (ref.current) ref.current.rotation.y += dt * 0.006;
+  });
+  return (
+    <group ref={ref}>
+      <Starfield />
+    </group>
+  );
+}
 
 export function PortfolioTerminal({ onSwitchToUI }) {
   const [input, setInput] = useState("");
@@ -495,22 +508,22 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "?":
         responseNode = (
           <div className="space-y-1.5 text-gray-200 py-1">
-            <div className="text-cyan-400 font-bold">Available Portfolio Commands:</div>
+            <div className="text-bat-400 font-bold">Available Portfolio Commands:</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-xs">
-              <div><span className="text-red-400 font-semibold">/about</span>       : Who is Pranav Mehrotra</div>
-              <div><span className="text-red-400 font-semibold">/experience</span>  : Full career timeline (4 roles)</div>
-              <div><span className="text-red-400 font-semibold">/warmo</span>       : Full-Stack Dev @ Warmo (GenAI)</div>
-              <div><span className="text-red-400 font-semibold">/dataresolve</span> : Cyber Security @ Data Resolve</div>
-              <div><span className="text-red-400 font-semibold">/musigma</span>     : Decision Scientist @ Mu Sigma</div>
-              <div><span className="text-red-400 font-semibold">/skills</span>      : Categorized technical arsenal</div>
-              <div><span className="text-red-400 font-semibold">/projects</span>    : All 7 mobile, server &amp; web builds</div>
-              <div><span className="text-red-400 font-semibold">/education</span>   : B.Tech CSE (9.0 CGPA) &amp; Meta Certs</div>
-              <div><span className="text-red-400 font-semibold">/contact</span>     : Email, Phone, LinkedIn, GitHub, X</div>
-              <div><span className="text-red-400 font-semibold">/resume</span>      : Launch official PDF resume</div>
-              <div><span className="text-red-400 font-semibold">/clear</span>       : Reset terminal history</div>
-              <div><span className="text-red-400 font-semibold">/ui</span>          : Switch back to graphical UI</div>
+              <div><span className="text-bat-400 font-semibold">/about</span>       : Who is Pranav Mehrotra</div>
+              <div><span className="text-bat-400 font-semibold">/experience</span>  : Full career timeline (4 roles)</div>
+              <div><span className="text-bat-400 font-semibold">/warmo</span>       : Full-Stack Dev @ Warmo (GenAI)</div>
+              <div><span className="text-bat-400 font-semibold">/dataresolve</span> : Cyber Security @ Data Resolve</div>
+              <div><span className="text-bat-400 font-semibold">/musigma</span>     : Decision Scientist @ Mu Sigma</div>
+              <div><span className="text-bat-400 font-semibold">/skills</span>      : Categorized technical arsenal</div>
+              <div><span className="text-bat-400 font-semibold">/projects</span>    : All 7 mobile, server &amp; web builds</div>
+              <div><span className="text-bat-400 font-semibold">/education</span>   : B.Tech CSE (9.0 CGPA) &amp; Meta Certs</div>
+              <div><span className="text-bat-400 font-semibold">/contact</span>     : Email, Phone, LinkedIn, GitHub, X</div>
+              <div><span className="text-bat-400 font-semibold">/resume</span>      : Launch official PDF resume</div>
+              <div><span className="text-bat-400 font-semibold">/clear</span>       : Reset terminal history</div>
+              <div><span className="text-bat-400 font-semibold">/ui</span>          : Switch back to graphical UI</div>
             </div>
-            <div className="text-xs text-cyan-300/80 pt-1">
+            <div className="text-xs text-bat-300/80 pt-1">
               Tip: Type any keyword (e.g. <span className="text-white">redis</span>, <span className="text-white">hermes</span>, <span className="text-white">docker</span>, <span className="text-white">microsoft</span>) to search directly.
             </div>
           </div>
@@ -521,18 +534,18 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "whoami":
       case "profile":
         responseNode = (
-          <div className="space-y-1.5 py-1 border-l-2 border-cyan-500/60 pl-3">
+          <div className="space-y-1.5 py-1 border-l-2 border-bat-500/60 pl-3">
             <div className="text-white font-bold">
-              {PORTFOLIO_DATA.profile.name} <span className="text-cyan-400 font-normal">(@{PORTFOLIO_DATA.profile.handle})</span>
+              {PORTFOLIO_DATA.profile.name} <span className="text-bat-400 font-normal">(@{PORTFOLIO_DATA.profile.handle})</span>
             </div>
-            <div className="text-xs text-red-400 font-semibold uppercase tracking-wider">
+            <div className="text-xs text-bat-400 font-semibold uppercase tracking-wider">
               {PORTFOLIO_DATA.profile.role}
             </div>
             <p className="text-xs text-gray-300 leading-relaxed">
               {PORTFOLIO_DATA.profile.objective}
             </p>
             <div className="text-xs">
-              <span className="text-cyan-400">fields_of_interest: </span>
+              <span className="text-bat-400">fields_of_interest: </span>
               <span className="text-white">{PORTFOLIO_DATA.profile.interests.join(", ")}</span>
             </div>
           </div>
@@ -547,16 +560,16 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         responseNode = (
           <div className="space-y-4 py-1">
             {PORTFOLIO_DATA.experiences.map((exp) => (
-              <div key={exp.company} className="border-l-2 border-cyan-500/50 pl-3 space-y-1">
+              <div key={exp.company} className="border-l-2 border-bat-500/50 pl-3 space-y-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-cyan-300 font-bold">{exp.company}</span>
-                  <span className="text-xs text-red-400">{exp.period}</span>
+                  <span className="text-bat-300 font-bold">{exp.company}</span>
+                  <span className="text-xs text-gray-400">{exp.period}</span>
                 </div>
                 <div className="text-xs text-white font-semibold">{exp.role}</div>
                 <ul className="space-y-1 pt-0.5">
                   {exp.highlights.map((item, i) => (
                     <li key={i} className="text-xs text-gray-300 leading-relaxed">
-                      <span className="text-cyan-400 mr-1.5">•</span>
+                      <span className="text-bat-400 mr-1.5">•</span>
                       {item}
                     </li>
                   ))}
@@ -576,22 +589,22 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         );
         if (expMatch) {
           responseNode = (
-            <div className="border-l-2 border-red-500/70 pl-3 space-y-1.5 py-1">
+            <div className="border-l-2 border-bat-500/70 pl-3 space-y-1.5 py-1">
               <div className="flex items-center justify-between">
-                <span className="text-cyan-300 font-bold">{expMatch.company}</span>
-                <span className="text-xs text-red-400">{expMatch.period}</span>
+                <span className="text-bat-300 font-bold">{expMatch.company}</span>
+                <span className="text-xs text-gray-400">{expMatch.period}</span>
               </div>
               <div className="text-xs text-white font-semibold">{expMatch.role}</div>
               <ul className="space-y-1">
                 {expMatch.highlights.map((h, i) => (
                   <li key={i} className="text-xs text-gray-300">
-                    <span className="text-cyan-400 mr-1.5">✔</span>
+                    <span className="text-bat-400 mr-1.5">✔</span>
                     {h}
                   </li>
                 ))}
               </ul>
               <div className="text-xs pt-1">
-                <span className="text-red-400">stack: </span>
+                <span className="text-bat-400">stack: </span>
                 <span className="text-white">{expMatch.tags.join(", ")}</span>
               </div>
             </div>
@@ -605,11 +618,11 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "stack":
       case "tech":
         responseNode = (
-          <div className="space-y-1.5 py-1 border-l-2 border-cyan-500/60 pl-3">
-            <div className="text-cyan-400 font-bold text-xs">Technical Skills Breakdown:</div>
+          <div className="space-y-1.5 py-1 border-l-2 border-bat-500/60 pl-3">
+            <div className="text-bat-400 font-bold text-xs">Technical Skills Breakdown:</div>
             {Object.entries(PORTFOLIO_DATA.skills).map(([cat, list]) => (
               <div key={cat} className="text-xs leading-relaxed">
-                <span className="text-red-400">{cat}: </span>
+                <span className="text-bat-400">{cat}: </span>
                 <span className="text-white">{list.join(", ")}</span>
               </div>
             ))}
@@ -626,13 +639,13 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         responseNode = (
           <div className="space-y-3 py-1">
             {PORTFOLIO_DATA.projects.map((proj) => (
-              <div key={proj.name} className="border-l-2 border-red-500/60 pl-3 space-y-0.5">
+              <div key={proj.name} className="border-l-2 border-bat-500/60 pl-3 space-y-0.5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-cyan-300 font-bold text-xs sm:text-sm">{proj.name}</span>
-                  <span className="text-[11px] text-red-400">[{proj.status}]</span>
+                  <span className="text-bat-300 font-bold text-xs sm:text-sm">{proj.name}</span>
+                  <span className="text-[11px] text-gray-400">[{proj.status}]</span>
                 </div>
                 <div className="text-xs">
-                  <span className="text-cyan-400/80">tech_stack: </span>
+                  <span className="text-bat-400/80">tech_stack: </span>
                   <span className="text-white">{proj.stack}</span>
                 </div>
                 <p className="text-xs text-gray-300">{proj.desc}</p>
@@ -641,7 +654,7 @@ export function PortfolioTerminal({ onSwitchToUI }) {
                     href={proj.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block text-xs text-cyan-400 underline hover:text-white"
+                    className="inline-block text-xs text-bat-400 underline hover:text-white"
                   >
                     {proj.link} ↗
                   </a>
@@ -658,20 +671,20 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "certs":
       case "certifications":
         responseNode = (
-          <div className="space-y-1.5 py-1 border-l-2 border-cyan-400 pl-3 text-xs">
-            <div className="text-cyan-300 font-bold text-sm">
+          <div className="space-y-1.5 py-1 border-l-2 border-bat-400 pl-3 text-xs">
+            <div className="text-bat-300 font-bold text-sm">
               {PORTFOLIO_DATA.education.degree}
             </div>
             <div className="text-white">
               {PORTFOLIO_DATA.education.institution} ({PORTFOLIO_DATA.education.period})
             </div>
-            <div className="text-red-400 font-bold">
+            <div className="text-bat-400 font-bold">
               CGPA: {PORTFOLIO_DATA.education.cgpa}
             </div>
-            <div className="pt-1 text-cyan-400 font-bold">Meta Certifications:</div>
+            <div className="pt-1 text-bat-400 font-bold">Meta Certifications:</div>
             {PORTFOLIO_DATA.education.certifications.map((c) => (
               <div key={c} className="text-gray-200">
-                <span className="text-red-400 mr-1.5">•</span>
+                <span className="text-bat-400 mr-1.5">•</span>
                 {c}
               </div>
             ))}
@@ -683,12 +696,12 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "socials":
       case "email":
         responseNode = (
-          <div className="space-y-1 py-1 border-l-2 border-cyan-500/60 pl-3 text-xs">
-            <div><span className="text-red-400">email:    </span><a href={`mailto:${PORTFOLIO_DATA.profile.email}`} className="text-white hover:underline">{PORTFOLIO_DATA.profile.email}</a></div>
-            <div><span className="text-red-400">phone:    </span><span className="text-white">{PORTFOLIO_DATA.profile.phone}</span></div>
-            <div><span className="text-red-400">linkedin: </span><a href={PORTFOLIO_DATA.profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">{PORTFOLIO_DATA.profile.linkedin}</a></div>
-            <div><span className="text-red-400">github:   </span><a href={PORTFOLIO_DATA.profile.github} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">{PORTFOLIO_DATA.profile.github}</a></div>
-            <div><span className="text-red-400">x/twitter:</span><a href={PORTFOLIO_DATA.profile.twitter} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">{PORTFOLIO_DATA.profile.twitter}</a></div>
+          <div className="space-y-1 py-1 border-l-2 border-bat-500/60 pl-3 text-xs">
+            <div><span className="text-bat-400">email:    </span><a href={`mailto:${PORTFOLIO_DATA.profile.email}`} className="text-white hover:underline">{PORTFOLIO_DATA.profile.email}</a></div>
+            <div><span className="text-bat-400">phone:    </span><span className="text-white">{PORTFOLIO_DATA.profile.phone}</span></div>
+            <div><span className="text-bat-400">linkedin: </span><a href={PORTFOLIO_DATA.profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-bat-400 hover:underline">{PORTFOLIO_DATA.profile.linkedin}</a></div>
+            <div><span className="text-bat-400">github:   </span><a href={PORTFOLIO_DATA.profile.github} target="_blank" rel="noopener noreferrer" className="text-bat-400 hover:underline">{PORTFOLIO_DATA.profile.github}</a></div>
+            <div><span className="text-bat-400">x/twitter:</span><a href={PORTFOLIO_DATA.profile.twitter} target="_blank" rel="noopener noreferrer" className="text-bat-400 hover:underline">{PORTFOLIO_DATA.profile.twitter}</a></div>
           </div>
         );
         break;
@@ -697,7 +710,7 @@ export function PortfolioTerminal({ onSwitchToUI }) {
       case "cv":
         window.open(PORTFOLIO_DATA.profile.resume, "_blank", "noopener,noreferrer");
         responseNode = (
-          <div className="text-xs text-cyan-400 py-1">
+          <div className="text-xs text-bat-400 py-1">
             ✔ Opening Resume in a new tab...{" "}
             <a href={PORTFOLIO_DATA.profile.resume} target="_blank" rel="noopener noreferrer" className="underline text-white">
               Click here if blocked ↗
@@ -713,8 +726,8 @@ export function PortfolioTerminal({ onSwitchToUI }) {
 
         if (!searchTerm) {
           responseNode = (
-            <div className="text-xs text-cyan-400">
-              Usage: <span className="text-white">/search &lt;keyword&gt;</span> (e.g. <span className="text-red-400">redis</span>, <span className="text-red-400">docker</span>)
+            <div className="text-xs text-bat-400">
+              Usage: <span className="text-white">/search &lt;keyword&gt;</span> (e.g. <span className="text-bat-400">redis</span>, <span className="text-bat-400">docker</span>)
             </div>
           );
           break;
@@ -747,26 +760,26 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         if (totalHits === 0) {
           responseNode = (
             <div className="text-xs text-red-400 py-1">
-              No matches found for <span className="text-white font-bold">&quot;{searchTerm}&quot;</span>. Type <span className="text-cyan-400">/help</span> or <span className="text-cyan-400">/skills</span>.
+              No matches found for <span className="text-white font-bold">&quot;{searchTerm}&quot;</span>. Type <span className="text-bat-400">/help</span> or <span className="text-bat-400">/skills</span>.
             </div>
           );
         } else {
           responseNode = (
-            <div className="space-y-2 py-1 border-l-2 border-cyan-400 pl-3 text-xs">
-              <div className="text-cyan-400">
+            <div className="space-y-2 py-1 border-l-2 border-bat-400 pl-3 text-xs">
+              <div className="text-bat-400">
                 ✔ Found {totalHits} match(es) for <span className="text-white font-bold">&quot;{searchTerm}&quot;</span>:
               </div>
 
               {matchedSkills.length > 0 && (
                 <div>
-                  <span className="text-red-400">skills: </span>
+                  <span className="text-bat-400">skills: </span>
                   <span className="text-white">{matchedSkills.join(", ")}</span>
                 </div>
               )}
 
               {matchedExp.map((e) => (
                 <div key={e.company} className="space-y-0.5">
-                  <div className="text-cyan-300 font-bold">
+                  <div className="text-bat-300 font-bold">
                     {e.company} — <span className="text-white">{e.role}</span> ({e.period})
                   </div>
                   {e.highlights
@@ -779,8 +792,8 @@ export function PortfolioTerminal({ onSwitchToUI }) {
 
               {matchedProjects.map((p) => (
                 <div key={p.name}>
-                  <span className="text-cyan-300 font-bold">{p.name}</span>{" "}
-                  <span className="text-red-400">[{p.stack}]</span> —{" "}
+                  <span className="text-bat-300 font-bold">{p.name}</span>{" "}
+                  <span className="text-gray-400">[{p.stack}]</span> —{" "}
                   <span className="text-gray-300">{p.desc}</span>
                 </div>
               ))}
@@ -833,58 +846,92 @@ export function PortfolioTerminal({ onSwitchToUI }) {
   return (
     <div
       onClick={() => inputRef.current?.focus()}
-      className="w-full max-w-5xl mx-auto my-2 animate-fadeInBottom"
+      className="relative min-h-dvh bg-cyber-bg text-gray-100 overflow-hidden animate-fadeInBottom"
     >
-      {/* SINGLE UNIFIED CYBER TERMINAL */}
-      <Terminal
-        sequence={false}
-        title="kamikaazeyy — /opt/portfolio (v2.6.0)"
-        headerRight={
-          onSwitchToUI && (
+      {/* 3D starfield backdrop — same deep-space layer as the watchtower */}
+      <div className="pointer-events-none absolute inset-0">
+        <Canvas
+          dpr={[1, 1.5]}
+          camera={{ position: [0, 0, 60], fov: 60 }}
+          gl={{ alpha: true, antialias: true }}
+        >
+          <StarfieldDrift />
+        </Canvas>
+      </div>
+
+      {/* faint HUD grid backdrop */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(56,182,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(56,182,255,0.045) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+
+      <div className="hud-sector-enter relative z-10 w-full max-w-5xl mx-auto px-4 py-6 sm:py-10">
+        <div className="hud-scanline" />
+        {/* Watchtower-style header panel + orbit return */}
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="hud-chamfer p-px bg-bat-400/30 inline-block">
+            <div className="hud-chamfer bg-cyber-surface/95 px-4 py-3">
+              <div className="hud-title-glitch font-orbitron text-sm sm:text-base font-bold tracking-wider text-white">
+                WATCHTOWER <span className="text-bat-400">{"//"} COMMS RELAY</span>
+              </div>
+              <div className="hidden sm:block font-mono text-[10px] text-gray-400 tracking-wide mt-0.5">
+                CMDR: PRANAV MEHROTRA &nbsp;·&nbsp; TERMINAL UPLINK ACTIVE
+              </div>
+            </div>
+          </div>
+          {onSwitchToUI && (
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 onSwitchToUI();
               }}
-              className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/40 text-[11px] font-mono text-cyan-300 transition-colors"
+              className="hud-chamfer-sm px-3 py-1.5 font-mono text-[10px] sm:text-[11px] tracking-wider uppercase bg-white/[0.03] text-gray-300 border border-white/10 hover:border-bat-400/50 hover:text-bat-300 transition-colors shrink-0"
             >
-              Switch to UI ↗
+              ↺ Return to Orbit
             </button>
-          )
-        }
-      >
-        {/* 1. KAMIKAAZEYY 3D BLOCK BANNER IN PORTFOLIO CYBER COLORS */}
+          )}
+        </div>
+
+        {/* SINGLE UNIFIED CYBER TERMINAL */}
+        <Terminal
+          sequence={false}
+          title="WATCHTOWER COMMS // kamikaazeyy — v2.6.0"
+          headerRight={null}
+        >
+        {/* 1. UPLINK BANNER — orbitron, matching watchtower titles */}
         <div className="mb-3 select-none overflow-x-auto">
-          <div
-            className="font-custom text-3xl sm:text-5xl md:text-6xl font-black tracking-widest uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-cyan-400"
-            style={{
-              filter: "drop-shadow(3px 3px 0px rgba(239, 68, 68, 0.35))",
-            }}
-          >
-            KAMIKAAZEYY
+          <div className="font-mono text-[10px] tracking-widest text-bat-400/80 mb-1">
+            SECURE UPLINK ESTABLISHED // NODE: KAMIKAAZEYY
+          </div>
+          <div className="hud-title-glitch font-orbitron text-3xl sm:text-5xl md:text-6xl font-bold tracking-wider uppercase leading-none text-white">
+            KAMIKAAZEYY<span className="text-bat-400">_OS</span>
           </div>
         </div>
 
         {/* 2. CYBER BORDERED TUI PANEL MATCHING PORTFOLIO PALETTE */}
-        <div className="relative border border-cyan-500/40 rounded-lg p-4 sm:p-5 mb-4 bg-[#0a0d17]/90 shadow-[inset_0_0_30px_rgba(0,229,255,0.03)]">
+        <div className="relative hud-chamfer-sm border border-bat-500/40 p-4 sm:p-5 mb-4 bg-cyber-card/90">
           {/* Top-right embedded border title */}
-          <div className="hidden sm:block absolute -top-2.5 right-4 bg-[#070910] px-2 text-xs font-mono font-bold text-cyan-400">
+          <div className="hidden sm:block absolute -top-2.5 right-4 bg-cyber-bg px-2 text-xs font-mono font-bold text-bat-400">
             Kamikaazeyy v2.6.0 (2026.10.15)
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             {/* Left Column: Kamikaazeyy Dot-Matrix Avatar Emblem + Session Info */}
             <div className="md:col-span-4 flex flex-col items-center text-center border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0 md:pr-4">
-              <pre className="text-[10px] sm:text-[11px] leading-[1.15] text-cyan-400 font-mono select-none mb-3 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+              <pre className="text-[10px] sm:text-[11px] leading-[1.15] text-bat-400 font-mono select-none mb-3">
                 {KAMIKAAZEYY_AVATAR_ASCII.join("\n")}
               </pre>
               <div className="text-xs leading-tight space-y-0.5">
                 <div>
-                  <span className="text-red-400 font-bold">kamikaazeyy</span>
+                  <span className="text-bat-400 font-bold">kamikaazeyy</span>
                   <span className="text-gray-400"> · Full-Stack &amp; AI</span>
                 </div>
-                <div className="text-cyan-400/80">/opt/kamikaazeyy</div>
+                <div className="text-bat-400/80">/opt/kamikaazeyy</div>
                 <div className="text-gray-500 text-[11px]">
                   Session: 20261015_pranav_m
                 </div>
@@ -895,24 +942,24 @@ export function PortfolioTerminal({ onSwitchToUI }) {
             <div className="md:col-span-8 space-y-3 text-xs leading-relaxed">
               {/* Available Commands */}
               <div>
-                <div className="text-cyan-400 font-bold mb-0.5">
+                <div className="text-bat-400 font-bold mb-0.5">
                   Available Commands
                 </div>
                 <div className="space-y-0.5">
                   <div>
-                    <span className="text-red-400/90">profile: </span>
+                    <span className="text-bat-400/90">profile: </span>
                     <span className="text-gray-200">/about, /whoami, /education, /certs, /resume</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">experience: </span>
+                    <span className="text-bat-400/90">experience: </span>
                     <span className="text-gray-200">/experience, /warmo, /dataresolve, /musigma, /webixy</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">projects: </span>
+                    <span className="text-bat-400/90">projects: </span>
                     <span className="text-gray-200">/projects, /flexo, /server, /pokedex</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">skills_search: </span>
+                    <span className="text-bat-400/90">skills_search: </span>
                     <span className="text-gray-200">/skills, /contact, /search &lt;query&gt;, /clear, /ui</span>
                   </div>
                 </div>
@@ -920,36 +967,36 @@ export function PortfolioTerminal({ onSwitchToUI }) {
 
               {/* Available Skills & Experience Domains */}
               <div>
-                <div className="text-cyan-400 font-bold mb-0.5">
+                <div className="text-bat-400 font-bold mb-0.5">
                   Available Skills &amp; Domains
                 </div>
                 <div className="space-y-0.5">
                   <div>
-                    <span className="text-red-400/90">autonomous-ai-agents: </span>
+                    <span className="text-bat-400/90">autonomous-ai-agents: </span>
                     <span className="text-gray-200">targetsense-ai, hermes-agent, llm-pipelines, lead-engine</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">frontend-mobile: </span>
+                    <span className="text-bat-400/90">frontend-mobile: </span>
                     <span className="text-gray-200">react.js, next.js, react-native, typescript, tailwind-css</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">backend-systems: </span>
+                    <span className="text-bat-400/90">backend-systems: </span>
                     <span className="text-gray-200">node.js, fastify, express.js, python, fastapi, microservices</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">databases-queues: </span>
+                    <span className="text-bat-400/90">databases-queues: </span>
                     <span className="text-gray-200">mongodb, postgresql, sqlite, redis, watermelondb</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">cloud-infrastructure: </span>
+                    <span className="text-bat-400/90">cloud-infrastructure: </span>
                     <span className="text-gray-200">aws, gcp, docker, manjaro-linux, tailscale, ci/cd</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">cybersecurity-dlp: </span>
+                    <span className="text-bat-400/90">cybersecurity-dlp: </span>
                     <span className="text-gray-200">ml-outlier-detection, siem, watchdog, linux-cli, network-sec</span>
                   </div>
                   <div>
-                    <span className="text-red-400/90">decision-science: </span>
+                    <span className="text-bat-400/90">decision-science: </span>
                     <span className="text-gray-200">arima-forecasting, pandas, scikit-learn, tableau, power-bi</span>
                   </div>
                 </div>
@@ -958,11 +1005,11 @@ export function PortfolioTerminal({ onSwitchToUI }) {
               {/* Profile Summary Line */}
               <div className="pt-1">
                 <div>
-                  <span className="text-cyan-400 font-bold">Profile: </span>
+                  <span className="text-bat-400 font-bold">Profile: </span>
                   <span className="text-white">Pranav Mehrotra (CGPA 9.0 · Meta Certified)</span>
                 </div>
                 <div className="text-gray-400">
-                  4 companies · 7 projects · 35+ skills · <span className="text-red-400">/help</span> for commands
+                  4 companies · 7 projects · 35+ skills · <span className="text-bat-400">/help</span> for commands
                 </div>
               </div>
             </div>
@@ -972,7 +1019,7 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         {/* 3. WELCOME LINE & CLICKABLE QUICK COMMANDS */}
         <div className="mb-3 space-y-2">
           <div className="text-gray-200 text-xs sm:text-sm">
-            Welcome to <span className="text-cyan-400 font-semibold">Kamikaazeyy</span>! Type your query or <span className="text-red-400">/help</span> for commands:
+            Welcome to <span className="text-bat-400 font-semibold">Kamikaazeyy</span>! Type your query or <span className="text-bat-400">/help</span> for commands:
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5">
@@ -984,7 +1031,7 @@ export function PortfolioTerminal({ onSwitchToUI }) {
                   e.stopPropagation();
                   executeCommand(cmd);
                 }}
-                className="px-2.5 py-0.5 rounded-md text-xs font-mono bg-white/[0.03] hover:bg-cyan-500/15 border border-white/10 hover:border-cyan-400/60 text-gray-300 hover:text-cyan-300 transition-colors"
+                className="hud-chamfer-sm px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase bg-white/[0.03] hover:bg-bat-400/15 border border-white/10 hover:border-bat-400/50 text-gray-300 hover:text-bat-300 transition-colors active:scale-[0.97]"
               >
                 {cmd}
               </button>
@@ -996,9 +1043,9 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         {history.length > 0 && (
           <div className="my-4 space-y-4 max-h-[420px] overflow-y-auto pr-1 border-t border-white/10 pt-3">
             {history.map((entry) => (
-              <div key={entry.id} className="space-y-1.5">
+              <div key={entry.id} className="space-y-1.5 animate-[hud-rise_0.45s_ease_both]">
                 <div className="flex items-center gap-2 text-xs sm:text-sm">
-                  <span className="text-red-400 font-bold">❯</span>
+                  <span className="text-bat-400 font-bold">❯</span>
                   <span className="text-white font-bold">{entry.command}</span>
                 </div>
                 <div className="pl-3">{entry.output}</div>
@@ -1011,8 +1058,8 @@ export function PortfolioTerminal({ onSwitchToUI }) {
         {/* 5. PROMPT IN PORTFOLIO CYBER COLORS */}
         <div className="mt-4">
           {/* Prompt Bar with top & bottom cyber rules */}
-          <div className="border-y border-cyan-500/40 py-2 flex items-center gap-2">
-            <span className="text-red-400 font-bold text-sm select-none">❯</span>
+          <div className="border-y border-bat-500/40 py-2 flex items-center gap-2">
+            <span className="text-bat-400 font-bold text-sm select-none">❯</span>
             <input
               ref={inputRef}
               type="text"
@@ -1020,19 +1067,26 @@ export function PortfolioTerminal({ onSwitchToUI }) {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Type /help, /experience, /warmo, /skills, or any keyword (e.g. redis, ai)..."
-              className="w-full bg-transparent text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none font-mono caret-cyan-400"
+              className="w-full bg-transparent text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none font-mono caret-bat-400"
               autoFocus
             />
             <button
               type="button"
               onClick={() => executeCommand(input)}
-              className="px-3 py-0.5 rounded-md bg-gradient-to-r from-red-600/30 to-cyan-500/30 hover:from-red-600/50 hover:to-cyan-500/50 border border-cyan-400/40 text-cyan-300 text-xs font-mono shrink-0 transition-all"
+              className="hud-chamfer-sm px-3 py-1 font-mono text-[10px] tracking-wider uppercase bg-bat-400/10 hover:bg-bat-400/20 border border-bat-400/40 text-bat-300 shrink-0 transition-colors"
             >
               Run ↵
             </button>
           </div>
         </div>
-      </Terminal>
+        </Terminal>
+
+        {/* HUD footer strip — matches watchtower readout style */}
+        <div className="mt-4 flex items-center justify-between font-mono text-[10px] tracking-widest text-gray-500">
+          <span>ORBITAL RELAY · ALT 35,786 KM // GEO-SYNC</span>
+          <span className="text-bat-400/70">UPLINK: SECURE</span>
+        </div>
+      </div>
     </div>
   );
 }

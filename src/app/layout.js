@@ -3,7 +3,7 @@
 import "./globals.css";
 
 // Import your custom fonts
-import { orbitron, dancingScript, myCustomFont } from '../fonts/fonts.js';
+import { orbitron, myCustomFont } from '../fonts/fonts.js';
 
 // Export metadata (this is allowed now)
 export const metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     // Add the font variable classes to the <html> tag
     <html 
       lang="en" 
-      className={`${orbitron.variable} ${dancingScript.variable} ${myCustomFont.variable}`}
+      className={`${orbitron.variable} ${myCustomFont.variable}`}
     >
       <body>{children}</body>
     </html>

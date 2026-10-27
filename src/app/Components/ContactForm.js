@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'motion/react';
 import { BsLinkedin, BsGithub, BsTwitterX } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 
@@ -55,22 +56,40 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-24">
+    <section id="contact" className="py-16 sm:py-24">
       <div className="max-w-xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full border border-red-500/30 bg-red-950/20 text-red-400 font-mono text-xs tracking-wider">
-            <span>{"// 03. CONTACT"}</span>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="mb-10"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="font-mono text-xs text-bat-400/80">
+              {"// 03. CONTACT"}
+            </span>
+            <span className="h-px flex-1 bg-cyber-border" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-white tracking-wider">
-            Get In Touch
-          </h2>
-        </div>
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-orbitron font-bold text-white tracking-wider text-balance">
+              Get In Touch
+            </h2>
+            <span className="hidden sm:block font-orbitron font-bold text-6xl lg:text-7xl leading-none text-white/[0.05] select-none" aria-hidden="true">03</span>
+          </div>
+        </motion.div>
 
         {/* Single Unified Contact Card */}
-        <div className="rounded-2xl border border-white/10 bg-[#0c0f1a]/85 p-6 sm:p-8 backdrop-blur-md shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="rounded-xl border border-cyber-border bg-cyber-card p-6 sm:p-8"
+        >
           {/* Compact Social Icons Bar */}
-          <div className="flex items-center justify-center gap-4 pb-6 mb-6 border-b border-white/10">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pb-6 mb-6 border-b border-white/10">
             {socialLinks.map(({ name, href, icon: Icon }) => (
               <a
                 key={name}
@@ -78,9 +97,9 @@ export default function ContactForm() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={name}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.03] hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/50 text-gray-300 hover:text-cyan-300 transition-all text-xs font-mono"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.03] hover:bg-bat-500/10 border border-white/10 hover:border-bat-400/50 text-gray-300 hover:text-bat-300 transition-colors text-xs font-mono"
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="size-4" />
                 <span>{name}</span>
               </a>
             ))}
@@ -99,7 +118,7 @@ export default function ContactForm() {
                   name="Name"
                   required
                   placeholder="Your Name"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all font-sans"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-bat-400 focus:ring-1 focus:ring-bat-400/50 transition-colors font-sans"
                 />
               </div>
 
@@ -113,7 +132,7 @@ export default function ContactForm() {
                   name="Email"
                   required
                   placeholder="you@domain.com"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all font-sans"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-bat-400 focus:ring-1 focus:ring-bat-400/50 transition-colors font-sans"
                 />
               </div>
             </div>
@@ -128,14 +147,14 @@ export default function ContactForm() {
                 rows="4"
                 required
                 placeholder="Your message..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all font-sans resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-bat-400 focus:ring-1 focus:ring-bat-400/50 transition-colors font-sans resize-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="mt-1 w-full py-3 px-6 rounded-xl font-orbitron text-xs sm:text-sm font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-red-600 via-rose-600 to-cyan-500 hover:from-red-500 hover:via-rose-500 hover:to-cyan-400 shadow-[0_0_20px_rgba(255,51,85,0.3)] hover:shadow-[0_0_28px_rgba(0,229,255,0.4)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="mt-1 w-full py-3 px-6 rounded-xl font-orbitron text-xs sm:text-sm font-semibold uppercase tracking-wider text-cyber-bg bg-bat-400 hover:bg-bat-300 transition duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
@@ -160,7 +179,7 @@ export default function ContactForm() {
               </div>
             )}
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { motion } from 'motion/react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -8,14 +9,13 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import { Security, Analytics, Code, AutoAwesome, School, Verified } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 
-const experiences = [
+export const experiences = [
   {
     period: "Jan 2026 - Present",
     company: "Warmo",
     role: "Full-Stack Developer",
-    icon: <AutoAwesome fontSize="small" sx={{ color: '#00e5ff' }} />,
-    color: '#00e5ff',
-    glowColor: 'rgba(0, 229, 255, 0.4)',
+    icon: <AutoAwesome fontSize="small" sx={{ color: '#ffdf00' }} />,
+    color: '#ffdf00',
     description: "Architected TargetSense AI to autonomously extract and qualify client leads using custom GenAI pipelines. Built multi-step automated email outreach with Redis job queues, SMTP connection pooling, and reply-detection auto-pause. Engineered a centralized multi-account unified inbox and completed an end-to-end cloud migration from AWS to GCP with MongoDB.",
     skills: ["Generative AI", "LLMs", "Node.js", "Redis", "MongoDB", "GCP / AWS", "Stripe", "SMTP/IMAP"]
   },
@@ -23,9 +23,8 @@ const experiences = [
     period: "Jan 2025 - Oct 2025",
     company: "Data Resolve Technologies",
     role: "Cyber Security Intern",
-    icon: <Security fontSize="small" sx={{ color: '#ff3355' }} />,
-    color: '#ff3355',
-    glowColor: 'rgba(255, 51, 85, 0.4)',
+    icon: <Security fontSize="small" sx={{ color: '#ffdf00' }} />,
+    color: '#ffdf00',
     description: "Engineered a Python ML logging tool (Pandas, Scikit-Learn) for anomaly detection in audit logs. Managed Linux CLI and PostgreSQL administration for enterprise & government DLP deployments. Implemented Watchdog for real-time log ingestion and orchestrated multi-platform agent rollouts across ASEAN and MEA clients.",
     skills: ["Cybersecurity", "Python", "Scikit-Learn", "PostgreSQL", "Linux", "SIEM", "DLP Protocols"]
   },
@@ -33,9 +32,8 @@ const experiences = [
     period: "Aug 2023 - Mar 2024",
     company: "Mu Sigma Business Solutions",
     role: "Decision Scientist",
-    icon: <Analytics fontSize="small" sx={{ color: '#00e5ff' }} />,
-    color: '#00e5ff',
-    glowColor: 'rgba(0, 229, 255, 0.4)',
+    icon: <Analytics fontSize="small" sx={{ color: '#ffdf00' }} />,
+    color: '#ffdf00',
     description: "Developed a Python ARIMA time-series sales forecasting model for Microsoft. Built an automated Tableau analytics dashboard monitoring clinical trials in real-time for a major U.S. pharmaceutical firm, and analyzed Nike's supply chain bottlenecks to optimize inventory management.",
     skills: ["ARIMA Modeling", "Python", "SQL", "Tableau", "Data Analytics", "Client Strategy"]
   },
@@ -43,21 +41,20 @@ const experiences = [
     period: "Feb 2023 - Apr 2023",
     company: "Webixy Technologies",
     role: "Web Developer Intern",
-    icon: <Code fontSize="small" sx={{ color: '#ff3355' }} />,
-    color: '#ff3355',
-    glowColor: 'rgba(255, 51, 85, 0.4)',
+    icon: <Code fontSize="small" sx={{ color: '#ffdf00' }} />,
+    color: '#ffdf00',
     description: "Engineered responsive, accessible frontend web interfaces and reusable UI components. Collaborated on cross-browser optimization, REST API integration, and modern JavaScript development.",
     skills: ["React", "JavaScript", "Tailwind CSS", "REST APIs", "HTML/CSS"]
   }
 ];
 
-const credentials = [
+export const credentials = [
   {
     title: "B.Tech in Computer Science",
     institution: "SRM Institute of Science and Technology",
     period: "2019 – 2023",
     badge: "CGPA: 9.0",
-    icon: <School fontSize="small" sx={{ color: '#00e5ff' }} />
+    icon: <School fontSize="small" sx={{ color: '#ffdf00' }} />
   },
   {
     title: "Meta Certified Frontend Developer",
@@ -65,26 +62,38 @@ const credentials = [
     period: "Credentials",
     badge: "3 Certifications",
     details: "Intro to Front-End Dev • Programming with JavaScript • Version Control",
-    icon: <Verified fontSize="small" sx={{ color: '#ff3355' }} />
+    icon: <Verified fontSize="small" sx={{ color: '#ffdf00' }} />
   }
 ];
 
 export default function TimelineComponent() {
   return (
-    <section id="experience" className="py-20 sm:py-24">
+    <section id="experience" className="py-16 sm:py-24">
       <div className="max-w-4xl mx-auto">
-        {/* Cyber Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full border border-red-500/30 bg-red-950/20 text-red-400 font-mono text-xs tracking-wider">
-            <span>{"// 01. TIMELINE & EXPERIENCE"}</span>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="mb-12 sm:mb-16"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="font-mono text-xs text-bat-400/80">
+              {"// 01. TIMELINE & EXPERIENCE"}
+            </span>
+            <span className="h-px flex-1 bg-cyber-border" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-white tracking-wider">
-            Work Experience
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-gray-400 font-sans max-w-lg mx-auto">
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-orbitron font-bold text-white tracking-wider text-balance">
+              Work Experience
+            </h2>
+            <span className="hidden sm:block font-orbitron font-bold text-6xl lg:text-7xl leading-none text-white/[0.05] select-none" aria-hidden="true">01</span>
+          </div>
+          <p className="mt-3 text-sm sm:text-base text-gray-400 font-sans max-w-lg text-pretty">
             Full-stack engineering, generative AI systems, enterprise cybersecurity, and data science consulting.
           </p>
-        </div>
+        </motion.div>
 
         {/* MUI Timeline styled with Cyber aesthetics */}
         <Timeline 
@@ -103,9 +112,8 @@ export default function TimelineComponent() {
               <TimelineSeparator>
                 <TimelineDot
                   sx={{
-                    bgcolor: '#0a0d17',
+                    bgcolor: '#121622',
                     border: `2px solid ${exp.color}`,
-                    boxShadow: `0 0 16px ${exp.glowColor}`,
                     p: 1.2,
                     m: 0,
                   }}
@@ -113,23 +121,25 @@ export default function TimelineComponent() {
                   {exp.icon}
                 </TimelineDot>
                 {index < experiences.length - 1 && (
-                  <TimelineConnector 
-                    sx={{ 
-                      bgcolor: 'transparent',
+                  <TimelineConnector
+                    sx={{
+                      bgcolor: '#1e2436',
                       width: '2px',
-                      backgroundImage: `linear-gradient(to bottom, ${exp.color}, rgba(255,255,255,0.1))`,
                       my: 1,
-                    }} 
+                    }}
                   />
                 )}
               </TimelineSeparator>
 
               <TimelineContent sx={{ py: 0, px: { xs: 2, sm: 3 } }}>
-                <div className="relative group rounded-2xl border border-white/10 bg-[#0c0f1a]/80 p-5 sm:p-6 backdrop-blur-md shadow-xl hover:border-cyan-500/40 transition-all duration-300">
-                  {/* Subtle hover corner accent */}
-                  <div className="absolute top-0 right-0 w-8 h-8 overflow-hidden rounded-tr-2xl pointer-events-none">
-                    <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-bl from-cyan-400/60 to-transparent" />
-                  </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.05 }}
+                  className="relative group rounded-xl border border-cyber-border bg-cyber-card p-5 sm:p-6 hover:border-bat-500/40 hover:-translate-y-0.5 transition duration-200"
+                >
+                  <span className="absolute inset-x-6 top-0 h-px bg-bat-400/0 group-hover:bg-bat-400/70 transition-colors duration-300 pointer-events-none" />
 
                   {/* Header: Company, Role, Date */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
@@ -141,17 +151,17 @@ export default function TimelineComponent() {
                           fontFamily: 'var(--font-orbitron), sans-serif',
                           fontSize: { xs: '1.05rem', sm: '1.2rem' },
                           fontWeight: 700,
-                          color: '#ffffff'
                         }}
+                        className="text-white group-hover:text-bat-300 transition-colors"
                       >
                         {exp.company}
                       </Typography>
-                      <span className="text-xs sm:text-sm font-mono text-cyan-400 font-medium">
+                      <span className="text-xs sm:text-sm font-mono text-bat-400 font-medium">
                         {exp.role}
                       </span>
                     </div>
 
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wide bg-white/5 border border-white/10 text-gray-300 self-start sm:self-auto">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wide tabular-nums bg-white/5 border border-white/10 text-gray-300 self-start sm:self-auto">
                       {exp.period}
                     </span>
                   </div>
@@ -172,7 +182,7 @@ export default function TimelineComponent() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </TimelineContent>
             </TimelineItem>
           ))}
@@ -187,11 +197,16 @@ export default function TimelineComponent() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {credentials.map((item) => (
-              <div 
+            {credentials.map((item, index) => (
+              <motion.div
                 key={item.title}
-                className="rounded-2xl border border-white/10 bg-[#0c0f1a]/80 p-5 backdrop-blur-md shadow-lg flex items-start gap-3.5 hover:border-cyan-500/40 transition-colors"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.06 }}
+                className="relative group rounded-xl border border-cyber-border bg-cyber-card p-5 flex items-start gap-3.5 hover:border-bat-500/40 hover:-translate-y-0.5 transition duration-200"
               >
+                <span className="absolute inset-x-6 top-0 h-px bg-bat-400/0 group-hover:bg-bat-400/70 transition-colors duration-300 pointer-events-none" />
                 <div className="p-2 rounded-xl bg-white/5 border border-white/10 shrink-0">
                   {item.icon}
                 </div>
@@ -200,7 +215,7 @@ export default function TimelineComponent() {
                     <h4 className="text-sm font-bold text-white font-orbitron truncate">
                       {item.title}
                     </h4>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 shrink-0">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-bat-950/60 border border-bat-500/30 text-bat-300 shrink-0">
                       {item.badge}
                     </span>
                   </div>
@@ -216,7 +231,7 @@ export default function TimelineComponent() {
                     </div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

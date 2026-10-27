@@ -43,6 +43,15 @@ export const GlowingStarsTitle = ({ className, children }) => {
 export const Illustration = ({ mouseEnter }) => {
   // Responsive columns and rows based on window size
   const [dimensions, setDimensions] = useState({ columns: 18, rows: 6 });
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mediaQuery.matches);
+    const onChange = (e) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", onChange);
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     function updateDimensions() {
@@ -66,6 +75,7 @@ export const Illustration = ({ mouseEnter }) => {
   const highlightedStars = useRef([]);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const interval = setInterval(() => {
       highlightedStars.current = Array.from({ length: 10 }, () =>
         Math.floor(Math.random() * stars)
@@ -74,7 +84,7 @@ export const Illustration = ({ mouseEnter }) => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [stars]);
+  }, [stars, reducedMotion]);
 
   return (
     <div
@@ -148,7 +158,7 @@ const Glow = ({ delay }) => {
       exit={{
         opacity: 0,
       }}
-      className="absolute left-1/2 -translate-x-1/2 z-10 h-[4px] w-[4px] rounded-full bg-blue-500 blur-[1px] shadow-2xl shadow-blue-400"
+      className="absolute left-1/2 -translate-x-1/2 z-10 size-[4px] rounded-full bg-bat-300/80 blur-[1px]"
     />
   );
 };
